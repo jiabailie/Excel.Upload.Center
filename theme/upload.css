@@ -1,0 +1,33 @@
+p {
+  font-family: Georgia;
+}
+
+#header {
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+#mainbody {
+  width: 100%;
+  border: thin solid #cccccc;
+}
+
+#mainbody p {
+  text-align: right;
+  font-family: Tahoma, Arial;  
+}
+
+#footer {
+  width: 100%;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#path {
+  width: 60%;
+}
+
+#status{
+  width: 80%;
+}

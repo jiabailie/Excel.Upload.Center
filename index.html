@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Excel upload center</title>
+    <link rel="stylesheet" type="text/css" href="theme/upload.css" />
+	<script type="text/javascript" src="js/upload.js"></script>
+</head>
+<body>
+    <table id="header">
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Excel上传中心</p>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <table id="mainbody">
+        <tr>
+            <td>
+                <p>选择文件：</p>
+            </td>
+            <td>
+                <input id="path" type="text" readonly="true" value="" />
+				<input id="excel" type="file" onchange="fileSelected();" />
+				<input type="button" value="上传" onclick="upload();" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>上传状态：</p>
+            </td>
+            <td>
+                <textarea id="status" readonly="true" rows="40"></textarea>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <table id="footer">
+        <tr>
+            <td>
+				Copyright&nbsp;&copy;&nbsp;YRG
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
