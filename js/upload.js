@@ -32,11 +32,11 @@ upload = function() {
 	var path1 = document.getElementById('excel').value;
 		
 	if(path1.length == 0) {
-		alert("请选择要上传的文件！");
+		alert("Please select the Excel file which you want to upload!");
 		return;
 	}
 	
-	document.getElementById('status').value = "源文件路径为:" + path1 + "\n";
+	document.getElementById('status').value = "The file path is " + path1 + "\n";
 	
 	var path2 = "";
 	var part = path1.split('\\');
@@ -70,12 +70,12 @@ uploadBus = function(filePath, outputFile) {
 	
 	client.connect();
 	
-	document.getElementById('status').value += "文件上传成功!\n";
+	document.getElementById('status').value += "File upload success!\n";
 }
 
 // Transform the excel files into json.
 toJson = function(filePath, outputFile) {	
-	document.getElementById('status').value += "开始把Excel文件转为Json...\n";
+	document.getElementById('status').value += "Start to transfer Excel to Json...\n";
 		
 	xlsx2json (
 	{
@@ -86,11 +86,11 @@ toJson = function(filePath, outputFile) {
 		if(err) {
 			document.getElementById('status').value += err + "\n";
 		} else {
-			document.getElementById('status').value += "转换:" + filePath + " --> " + outputFile  + "\n";
+			document.getElementById('status').value += "Transfer:" + filePath + " --> " + outputFile  + "\n";
 		}
 	});
 	
-	document.getElementById('status').value += "Excel文件转为Json成功!\n";
+	document.getElementById('status').value += "File Transfer success!\n";
 	
 	uploadBus(filePath, outputFile);
 }
