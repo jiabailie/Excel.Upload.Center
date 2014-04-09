@@ -7,28 +7,17 @@ var sourcePath = '';
 var postFix = '.xlsx';
 var client = new ftp();
 
+// Clear the contents of textboxes.
 clearContent = function() {
 	document.getElementById('path').value = '';
 	document.getElementById('excel').value = '';
 	document.getElementById('status').value = '';
 }
 
+// Remove the redundant physical path and return the file name.
 getFileName = function(str) {
 	var part = str.split('\\');	
 	return part[part.length - 1];
-}
-
-testFTP = function() {
-	client.on('ready', function() {
-		client.list(function(err, list) {
-			if(err) {
-				throw err;
-			}
-			
-			client.end();
-		});
-	});
-	client.connect();
 }
 
 // If some file is ready for upload, write the full path into the text box.
@@ -39,7 +28,6 @@ fileSelected = function () {
 
 // Button action to upload file.
 upload = function() {
-	testFTP();
 	
 	var path1 = document.getElementById('excel').value;
 		
@@ -61,6 +49,31 @@ upload = function() {
 	toJson(path1, path2);
 }
 
+// Do the upload action.
+uploadAction = function(fileType, filePath) {
+	client.on('ready', function() {
+    	client.put(filePath, getFileName(filePath), function(err) {
+    		if(err) {
+    			throw err;
+    		}
+    		client.end();
+    	});
+    });  
+}
+
+// Control the file upload process.
+uploadBus = function(filePath, outputFile) {
+
+	uploadAction("Excel", filePath);
+	
+	uploadAction("Json", outputFile);
+	
+	client.connect();
+	
+	document.getElementById('status').value += "文件上传成功!\n";
+}
+
+// Transform the excel files into json.
 toJson = function(filePath, outputFile) {	
 	document.getElementById('status').value += "开始把Excel文件转为Json...\n";
 		
@@ -79,14 +92,5 @@ toJson = function(filePath, outputFile) {
 	
 	document.getElementById('status').value += "Excel文件转为Json成功!\n";
 	
-	client.on('ready', function() {
-		client.put(filePath, getFileName(filePath), function(err) {
-			if(err) {
-				throw err;
-			}
-			client.ent();
-		});
-	});
-	
-	client.connect();
+	uploadBus(filePath, outputFile);
 }
